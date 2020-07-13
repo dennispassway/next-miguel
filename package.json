@@ -1,0 +1,21 @@
+{
+  "name": "miguel",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -r lib && babel src -d lib"
+  },
+  "dependencies": {
+    "next": "^9.4.4",
+    "glob": "^7.1.6"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4"
+  }
+}
