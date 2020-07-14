@@ -1,40 +1,40 @@
+#!/usr/bin/env node
+
 const glob = require("glob");
 const fs = require("fs");
 
-export default function () {
-  glob("**/*.example.js", function (err, filePaths) {
+glob("**/*.example.js", function (err, filePaths) {
+  if (err) {
+    throw err;
+  }
+
+  const examples = filePaths.map((filePath) => {
+    const nameRegEx = /.+\/(.+)\.example\.js/;
+    const [path, name] = filePath.match(nameRegEx);
+    const importString = `import ${name}Example from '${path}'`;
+    const elementString = `${name}Example`;
+
+    const fileContents = fs.readFileSync(filePath, "utf8");
+    const idRegEx = /\<Describer.+id\=\"(.+)\"\>/;
+    const idResult = fileContents.match(idRegEx);
+    const idString =
+      idResult && idResult.length
+        ? idResult[1]
+        : Math.random().toString(32).substr(2);
+
+    return { importString, elementString, idString };
+  });
+
+  const template = generateTemplate(examples);
+
+  fs.writeFile("./pages/miguel-styleguide.js", template, "utf8", (err) => {
     if (err) {
       throw err;
     }
 
-    const examples = filePaths.map((filePath) => {
-      const nameRegEx = /.+\/(.+)\.example\.js/;
-      const [path, name] = filePath.match(nameRegEx);
-      const importString = `import ${name}Example from '${path}'`;
-      const elementString = `${name}Example`;
-
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const idRegEx = /\<Describer.+id\=\"(.+)\"\>/;
-      const idResult = fileContents.match(idRegEx);
-      const idString =
-        idResult && idResult.length
-          ? idResult[1]
-          : Math.random().toString(32).substr(2);
-
-      return { importString, elementString, idString };
-    });
-
-    const template = generateTemplate(examples);
-
-    fs.writeFile("./pages/miguel-styleguide.js", template, "utf8", (err) => {
-      if (err) {
-        throw err;
-      }
-
-      console.log("Miguel generated!");
-    });
+    console.log("Miguel generated!");
   });
-}
+});
 
 function generateTemplate(examples) {
   return `
