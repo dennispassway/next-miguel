@@ -15,8 +15,12 @@ glob("**/*.example.js", function (err, filePaths) {
     const elementString = `${name}Example`;
 
     const fileContents = fs.readFileSync(filePath, "utf8");
-    const idRegEx = /\<Describer.+id\=\"(.+)\"\>/;
-    const idResult = fileContents.match(idRegEx);
+    const describerPropsRegex = /\<Describer([^\>]*\n*)*\>/;
+    const describerMatches = fileContents.match(describerPropsRegex);
+    const describerProps =
+      describerMatches && describerMatches.length ? describerMatches[1] : "";
+    const idRegEx = /id\=\"(.+)\"/;
+    const idResult = describerProps.match(idRegEx);
     const idString =
       idResult && idResult.length
         ? idResult[1]
@@ -49,7 +53,9 @@ function generateTemplate(examples) {
 
       const componentMap = {
         ${examples
-          .map(({ idString, elementString }) => `${idString}: ${elementString}`)
+          .map(
+            ({ idString, elementString }) => `'${idString}': ${elementString}`
+          )
           .join(",\n")}
       };
 
