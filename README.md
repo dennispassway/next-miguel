@@ -54,7 +54,7 @@ export default () => (
 
 ### Generating the Miguel styleguide
 Run the command you created in your `package.json`: `npm run build-miguel` or `yarn build-miguel` to generate the styleguide.
-The styleguide is created at `/pages/miguel-styleguide.js`
+By default, Miguel finds all `*.examples.js` files in your project and generates exampkles for them. The styleguide is created at `/pages/miguel-styleguide.js`
 
 Now run your local next server (`next`) and navigate to `/miguel-styleguide` to see the result.
 
