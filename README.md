@@ -23,7 +23,7 @@ npm install miguel
 ### Adding Miguel to your build
 Add the Miguel command to your buildstep in the `package.json`
 
-```
+```json
 {
   "scripts": {
     "build": "miguel && next build",
@@ -36,7 +36,7 @@ Add the Miguel command to your buildstep in the `package.json`
 To create a Miguel example create a file named: `[componentname].example.js`.
 Use the `Describer` included in Miguel to document your component.
 
-```
+```js
 import { Describer } from "miguel";
 import { Contact } from "./Contact";
 
