@@ -1,8 +1,12 @@
 {
   "name": "miguel",
+  "description": "A simple styleguide generator for Next.js",
   "version": "0.0.1",
   "main": "./lib/index.js",
   "license": "MIT",
+  "bin" : {
+    "miguel" : "./lib/bin/cli.js"
+  },
   "scripts": {
     "build": "rm -r lib && babel src -d lib"
   },
