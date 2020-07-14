@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Describer = ({ children, description, title, id }) => {
   const router = useRouter();
-  const component = router?.query.component
+  const component = router?.query.component;
 
   if (component) {
     return children;
