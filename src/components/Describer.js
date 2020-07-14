@@ -2,9 +2,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 export const Describer = ({ children, description, title, id }) => {
-  const {
-    query: { component },
-  } = useRouter();
+  const router = useRouter();
+  const component = router?.query.component
 
   if (component) {
     return children;
