@@ -1,4 +1,4 @@
-import runMiguel from "../scripts/runMiguel";
+import runMiguel from "./scripts/runMiguel";
 
 class MiguelPlugin {
   constructor(options) {
@@ -29,7 +29,7 @@ class MiguelPlugin {
   }
 }
 
-export default (nextConfig) => ({
+module.exports = (nextConfig) => ({
   ...nextConfig,
   webpack(config, options) {
     if (!options.defaultLoaders) {
