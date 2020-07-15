@@ -19,6 +19,8 @@ class MiguelPlugin {
 
   apply() {
     if (this.options.watch === false) {
+      runMiguel(this.options);
+
       return console.log(
         "\x1b[33mmiguel\x1b[0m - %s",
         `not watching for file changes`
