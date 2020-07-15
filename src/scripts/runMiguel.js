@@ -34,10 +34,13 @@ export default ({ extension, page }) => {
 
     const template = generateTemplate({ examples, page });
 
+    /* @TODO: check if pages exists */
     fs.writeFile(`./pages/${page}.js`, template, "utf8", (err) => {
       if (err) {
         throw err;
       }
+
+      /* @TODO: add page to gitignore, with option to disable */
 
       console.log(
         "\x1b[33mmiguel\x1b[0m - %s",
