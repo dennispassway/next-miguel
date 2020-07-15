@@ -2,7 +2,7 @@ import runMiguel from "./scripts/runMiguel";
 
 class MiguelPlugin {
   constructor(options) {
-    this.options = options;
+    this.options = options.miguel || {};
   }
 
   getChangedFiles(compiler) {
@@ -22,7 +22,11 @@ class MiguelPlugin {
     compiler.hooks.watchRun.tap("MiguelPlugin", () => {
       const changedFile = this.getChangedFiles(compiler);
 
-      if (changedFile.find((file) => file.includes(".example.js"))) {
+      if (
+        changedFile.find((file) =>
+          file.includes(this.options.extension || ".example.js")
+        )
+      ) {
         runMiguel(this.options);
       }
     });

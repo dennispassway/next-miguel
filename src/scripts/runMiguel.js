@@ -1,14 +1,19 @@
 const glob = require("glob");
 const fs = require("fs");
 
-export default () => {
-  glob("**/*.example.js", function (err, filePaths) {
+export default ({ extension, page }) => {
+  const fileExtension = extension || ".example.js";
+  const pagePath = page || "miguel-styleguide";
+
+  glob(`**/*${fileExtension}`, function (err, filePaths) {
     if (err) {
       throw err;
     }
 
     const examples = filePaths.map((filePath) => {
-      const nameRegEx = /.+\/(.+)\.example\.js/;
+      const nameRegEx = new RegExp(
+        `.+\/(.+)${fileExtension.replace(/\./g, "\\.")}`
+      );
       const [path, name] = filePath.match(nameRegEx);
       const importString = `import ${name}Example from '${path}'`;
       const elementString = `${name}Example`;
@@ -30,12 +35,12 @@ export default () => {
 
     const template = generateTemplate(examples);
 
-    fs.writeFile("./pages/miguel-styleguide.js", template, "utf8", (err) => {
+    fs.writeFile(`./pages/${pagePath}.js`, template, "utf8", (err) => {
       if (err) {
         throw err;
       }
 
-      console.log("Miguel generated!");
+      console.log(`Miguel styleguide generated at pages/${pagePath}.js.`);
     });
   });
 };
