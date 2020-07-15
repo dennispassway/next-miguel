@@ -3,17 +3,15 @@ const fs = require("fs");
 
 export default ({ extension, page }) => {
   console.log("\x1b[33mmiguel\x1b[0m - %s", "starting styleguide generation");
-  const fileExtension = extension || ".example.js";
-  const pagePath = page || "miguel-styleguide";
 
-  glob(`**/*${fileExtension}`, function (err, filePaths) {
+  glob(`**/*${extension}`, function (err, filePaths) {
     if (err) {
       throw err;
     }
 
     const examples = filePaths.map((filePath) => {
       const nameRegEx = new RegExp(
-        `.+\/(.+)${fileExtension.replace(/\./g, "\\.")}`
+        `.+\/(.+)${extension.replace(/\./g, "\\.")}`
       );
       const [path, name] = filePath.match(nameRegEx);
       const importString = `import ${name}Example from '${path}'`;
@@ -34,24 +32,24 @@ export default ({ extension, page }) => {
       return { importString, elementString, idString };
     });
 
-    const template = generateTemplate(examples);
+    const template = generateTemplate({ examples, page });
 
-    fs.writeFile(`./pages/${pagePath}.js`, template, "utf8", (err) => {
+    fs.writeFile(`./pages/${page}.js`, template, "utf8", (err) => {
       if (err) {
         throw err;
       }
 
       console.log(
         "\x1b[33mmiguel\x1b[0m - %s",
-        `generated styleguide at pages/${pagePath}.js`
+        `generated styleguide at pages/${page}.js`
       );
     });
   });
 };
 
-function generateTemplate(examples) {
+function generateTemplate({ examples, page }) {
   return `
-    import { StyleGuide } from "miguel/components";
+    import { MiguelContext, StyleGuide } from "miguel/components";
     import { useRouter } from "next/router";
     ${examples.map(({ importString }) => importString).join("\n")}
 
@@ -72,18 +70,22 @@ function generateTemplate(examples) {
         const Element = componentMap[component];
 
         return (
-          <StyleGuide clean>
-            {!Element ? <div>Component could not be found</div> : <Element />}
-          </StyleGuide>
+          <MiguelContext.Provider value={{ miguelRoot: '${page}' }}>
+            <StyleGuide clean>
+              {!Element ? <div>Component could not be found</div> : <Element />}
+            </StyleGuide>
+          </MiguelContext.Provider>
         );
       }
 
       return (
-        <StyleGuide>
-          ${examples
-            .map(({ elementString }) => `<${elementString} />`)
-            .join("\n")}
-        </StyleGuide>
+        <MiguelContext.Provider value={{ miguelRoot: '${page}' }}>
+          <StyleGuide>
+            ${examples
+              .map(({ elementString }) => `<${elementString} />`)
+              .join("\n")}
+          </StyleGuide>
+        </MiguelContext.Provider>
       );
     };
   `;
