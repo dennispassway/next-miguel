@@ -1,5 +1,9 @@
-import { StyleGuide } from './components/StyleGuide'
-import { Describer } from './components/Describer'
+import { Describer } from "./components/Describer";
+import { StyleGuide } from "./components/StyleGuide";
+import withMiguel from "./plugin/withMiguel";
 
-exports.Describer = Describer
-exports.StyleGuide = StyleGuide
+module.exports = {
+  Describer,
+  StyleGuide,
+  withMiguel,
+};
