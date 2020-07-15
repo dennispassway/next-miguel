@@ -51,7 +51,7 @@ export default ({ extension, page }) => {
 
 function generateTemplate(examples) {
   return `
-    import { StyleGuide } from "miguel";
+    import { StyleGuide } from "miguel/components";
     import { useRouter } from "next/router";
     ${examples.map(({ importString }) => importString).join("\n")}
 

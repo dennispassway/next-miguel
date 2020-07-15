@@ -4,11 +4,8 @@
   "version": "0.0.4",
   "main": "./lib/index.js",
   "license": "MIT",
-  "bin": {
-    "miguel": "./lib/bin/cli.js"
-  },
   "scripts": {
-    "build": "rm -r lib && babel src -d lib"
+    "build": "rimraf lib && babel src -d lib"
   },
   "dependencies": {
     "glob": "^7.1.6",
@@ -16,11 +13,12 @@
     "watchpack": "2.0.0-beta.13"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.4",
-    "@babel/core": "^7.10.4"
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "rimraf": "^3.0.2"
   }
 }
