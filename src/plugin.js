@@ -5,31 +5,30 @@ class MiguelPlugin {
     this.options = options.miguel || {};
   }
 
-  getChangedFiles(compiler) {
+  getChangedFilesWithExtension(compiler) {
     const { watchFileSystem } = compiler;
     const watcher = watchFileSystem.watcher || watchFileSystem.wfs.watcher;
 
-    return Object.keys(watcher.mtimes);
+    const changedFiles = Object.keys(watcher.mtimes);
+    return changedFiles.filter((file) =>
+      file.includes(this.options.extension || ".example.js")
+    );
   }
 
   apply(compiler) {
-    // Set up blog index at start
     compiler.hooks.environment.tap("MiguelPlugin", () => {
       runMiguel(this.options);
     });
 
-    // Re generate styleguide when example.js files change
-    compiler.hooks.watchRun.tap("MiguelPlugin", () => {
-      const changedFile = this.getChangedFiles(compiler);
+    if (this.options.watch !== false) {
+      compiler.hooks.watchRun.tap("MiguelPlugin", () => {
+        const changedFiles = this.getChangedFilesWithExtension(compiler);
 
-      if (
-        changedFile.find((file) =>
-          file.includes(this.options.extension || ".example.js")
-        )
-      ) {
-        runMiguel(this.options);
-      }
-    });
+        if (changedFiles && changedFiles.length) {
+          runMiguel(this.options);
+        }
+      });
+    }
   }
 }
 
