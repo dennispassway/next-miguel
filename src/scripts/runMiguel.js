@@ -2,6 +2,7 @@ const glob = require("glob");
 const fs = require("fs");
 
 export default ({ extension, page }) => {
+  console.log("\x1b[33mmiguel\x1b[0m - %s", "starting styleguide generation");
   const fileExtension = extension || ".example.js";
   const pagePath = page || "miguel-styleguide";
 
@@ -40,7 +41,10 @@ export default ({ extension, page }) => {
         throw err;
       }
 
-      console.log(`Miguel styleguide generated at pages/${pagePath}.js.`);
+      console.log(
+        "\x1b[33mmiguel\x1b[0m - %s",
+        `generated styleguide at pages/${pagePath}.js`
+      );
     });
   });
 };
