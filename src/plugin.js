@@ -1,34 +1,51 @@
+import path from "path";
 import runMiguel from "./scripts/runMiguel";
+import Watchpack from "watchpack";
+
+const defaults = {
+  directories: ["components"],
+  extension: ".example.js",
+  page: "miguel",
+  watch: true,
+};
 
 class MiguelPlugin {
   constructor(options) {
-    this.options = options.miguel || {};
+    this.options = {
+      ...defaults,
+      ...options.miguel,
+    };
   }
 
-  getChangedFilesWithExtension(compiler) {
-    const { watchFileSystem } = compiler;
-    const watcher = watchFileSystem.watcher || watchFileSystem.wfs.watcher;
-
-    const changedFiles = Object.keys(watcher.mtimes);
-    return changedFiles.filter((file) =>
-      file.includes(this.options.extension || ".example.js")
-    );
-  }
-
-  apply(compiler) {
-    compiler.hooks.environment.tap("MiguelPlugin", () => {
-      runMiguel(this.options);
-    });
-
-    if (this.options.watch !== false) {
-      compiler.hooks.watchRun.tap("MiguelPlugin", () => {
-        const changedFiles = this.getChangedFilesWithExtension(compiler);
-
-        if (changedFiles && changedFiles.length) {
-          runMiguel(this.options);
-        }
-      });
+  apply() {
+    if (this.options.watch === false) {
+      return console.log(
+        "\x1b[33mmiguel\x1b[0m - %s",
+        `not watching for file changes`
+      );
     }
+
+    let files = [];
+
+    const wp = new Watchpack();
+    const directoriesToWatch = this.options.directories.map((dir) =>
+      path.join(path.resolve("."), dir)
+    );
+    wp.watch([], directoriesToWatch, 0);
+
+    wp.on("aggregated", () => {
+      const knownFiles = wp.getTimeInfoEntries();
+      const knownFilesAsArray = Array.from(knownFiles.entries());
+      const newFiles = knownFilesAsArray
+        .filter(([key]) => key.includes(this.options.extension))
+        .map(([key]) => key)
+        .sort((a, b) => b < a);
+
+      if (JSON.stringify(newFiles) !== JSON.stringify(files)) {
+        runMiguel(this.options);
+        files = newFiles;
+      }
+    });
   }
 }
 
