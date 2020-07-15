@@ -1,2 +1,5 @@
-src
 .babelrc
+.vscode
+*.DS_Store
+*.log
+src
