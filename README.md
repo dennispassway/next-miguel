@@ -174,3 +174,10 @@ export default () => (
   </Example>
 );
 ```
+
+## Todos
+[] better styling on components
+[] publish with github actions (https://sergiodxa.com/articles/github-actions-npm-publish/)
+[] Multiple examples in 1 file
+[] move to next-miguel?
+[] open-source it
