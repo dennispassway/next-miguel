@@ -3,7 +3,7 @@ const glob = require("glob");
 const path = require("path");
 
 export default ({ extension, gitignore, page }) => {
-  console.log("\x1b[33mmiguel\x1b[0m - %s", "starting styleguide generation");
+  console.log("\x1b[33mmiguel\x1b[0m - %s", "styleguide:start");
 
   glob(`**/*${extension}`, function (err, filePaths) {
     if (err) {
@@ -57,7 +57,7 @@ function writeTemplateToFile({ examples, page }) {
       throw err;
     }
 
-    console.log("\x1b[33mmiguel\x1b[0m - %s", `generated styleguide`);
+    console.log("\x1b[33mmiguel\x1b[0m - %s", `styleguide:done`);
   });
 }
 
@@ -73,7 +73,7 @@ function addToGitignore({ page }) {
 
       console.log(
         "\x1b[33mmiguel\x1b[0m - %s",
-        `created gitignore with ${pagePath}`
+        `created .gitignore with ${pagePath}`
       );
     });
   } else {
@@ -96,7 +96,7 @@ function addToGitignore({ page }) {
 
       console.log(
         "\x1b[33mmiguel\x1b[0m - %s",
-        `added ${pagePath} to gitignore`
+        `added ${pagePath} to .gitignore`
       );
     });
   }
