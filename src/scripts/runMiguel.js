@@ -57,10 +57,7 @@ function writeTemplateToFile({ examples, page }) {
       throw err;
     }
 
-    console.log(
-      "\x1b[33mmiguel\x1b[0m - %s",
-      `generated styleguide at ${targetPath}`
-    );
+    console.log("\x1b[33mmiguel\x1b[0m - %s", `generated styleguide`);
   });
 }
 
@@ -76,7 +73,7 @@ function addToGitignore({ page }) {
 
       console.log(
         "\x1b[33mmiguel\x1b[0m - %s",
-        `created gitignore with ${pagePath} at ${gitgnorePath}`
+        `created gitignore with ${pagePath}`
       );
     });
   } else {
@@ -99,7 +96,7 @@ function addToGitignore({ page }) {
 
       console.log(
         "\x1b[33mmiguel\x1b[0m - %s",
-        `added ${pagePath} to gitignore at ${gitgnorePath}`
+        `added ${pagePath} to gitignore`
       );
     });
   }
