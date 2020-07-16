@@ -20,7 +20,7 @@ No setbacks or frustrated keyboard smashing. If it works in your Next app, it wo
 To get started, add Miguel to your project with yarn or npm.
 
 ```
-yarn install miguel
+yarn add miguel
 ```
 
 ```
