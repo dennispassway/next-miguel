@@ -3,6 +3,10 @@ Miguel is a simple styleguide generator for Next.js
 
 @TODO
 
+### How is it different than [X]?
+
+@TODO
+
 ## How does it work?
 
 @TODO
@@ -28,10 +32,11 @@ const withMiguel = require("miguel");
 
 module.exports = withMiguel({
   miguel: {
-    directories: ["components"],
-    extension: ".example.js",
-    page: "miguel",
-    watch: true,
+    ignore: ["path/to/ignore"], // Add patterns to ignore
+    extension: ".example.js", // Extension of your example files
+    gitignore: true, // Add styleguide to gitignore
+    page: "miguel", // Render page at 'pages/miguel.js'
+    watch: true, // Watch for new / removed files while developing
   },
 });
 ```
