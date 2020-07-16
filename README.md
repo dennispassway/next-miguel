@@ -1,6 +1,6 @@
 <p align="center">
-    <img width="400" alt="miguel" src="https://user-images.githubusercontent.com/2776959/87653298-de546d80-c744-11ea-8055-18c99bea0685.png">
-  <p align="center">Styleguide generator for [Next.js](https://nextjs.org/)</p>
+    <img width="400" alt="miguel" src="https://user-images.githubusercontent.com/2776959/87653847-a863b900-c745-11ea-9c6d-ac20456813a5.png">
+  <p align="center">Styleguide generator for https://nextjs.org/</p>
 </p>
 
 ## What is Miguel?
