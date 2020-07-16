@@ -2,9 +2,11 @@ import path from "path";
 import runMiguel from "./scripts/runMiguel";
 import Watchpack from "watchpack";
 
+/* @TODO: instead of directories add directories to ignore */
 const defaults = {
   directories: ["components"],
   extension: ".example.js",
+  gitignore: true,
   page: "miguel",
   watch: true,
 };
