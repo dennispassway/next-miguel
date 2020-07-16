@@ -1,12 +1,14 @@
+import notify from "./utils/notify";
 import path from "path";
 import runMiguel from "./scripts/runMiguel";
 import Watchpack from "watchpack";
 
 const defaults = {
-  ignore: [],
   extension: ".example.js",
   gitignore: true,
+  ignore: [],
   page: "miguel",
+  rebuildIdsOnUpdate: false,
   watch: true,
 };
 
@@ -18,15 +20,35 @@ class MiguelPlugin {
     };
   }
 
-  apply() {
+  getChangedFiles(compiler) {
+    const { watchFileSystem } = compiler;
+    const watcher = watchFileSystem.watcher || watchFileSystem.wfs.watcher;
+
+    return Object.keys(watcher.mtimes);
+  }
+
+  apply(compiler) {
     if (this.options.watch === false) {
       runMiguel(this.options);
-
-      return console.log(
-        "\x1b[33mmiguel\x1b[0m - %s",
-        `not watching for file changes`
-      );
+      return notify("not watching for file changes");
     }
+
+    compiler.hooks.watchRun.tap("MiguelPlugin", () => {
+      const changedFiles = this.getChangedFiles(compiler);
+      const { extension } = this.options;
+
+      if (changedFiles.find((file) => file.includes(extension))) {
+        notify(
+          `example updated (${
+            this.options.rebuildIdsOnUpdate ? "with" : "without"
+          } rebuild of ids)`
+        );
+
+        if (this.options.rebuildIdsOnUpdate) {
+          runMiguel(this.options);
+        }
+      }
+    });
 
     let files = [];
 
