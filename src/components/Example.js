@@ -2,11 +2,11 @@ import { useMiguelContext } from "./context";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export const Describer = ({ children, description, title, id }) => {
+export const Example = ({ children, description, title, id }) => {
   const { miguelRoot } = useMiguelContext();
   const router = useRouter();
 
-  const component = router?.query.component;
+  const component = router?.query.id;
   const root = miguelRoot || "miguel";
 
   if (component) {
@@ -18,8 +18,8 @@ export const Describer = ({ children, description, title, id }) => {
       <h2>{title}</h2>
       <p>{description}</p>
       {id && (
-        <Link href={`/${root}?component=${id}`}>
-          <a>{`/${root}?component=${id}`}</a>
+        <Link href={`/${root}?id=${id}`}>
+          <a>{`/${root}?id=${id}`}</a>
         </Link>
       )}
       {children}

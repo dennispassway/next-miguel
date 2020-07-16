@@ -110,7 +110,7 @@ function generateTemplate({ examples, page }) {
 
     export default () => {
       const {
-        query: { component },
+        query: { id },
       } = useRouter();
 
       const componentMap = {
@@ -121,13 +121,13 @@ function generateTemplate({ examples, page }) {
           .join(",\n")}
       };
 
-      if (component) {
-        const Element = componentMap[component];
+      if (id) {
+        const Element = componentMap[id];
 
         return (
           <MiguelContext.Provider value={{ miguelRoot: '${page}' }}>
             <StyleGuide clean>
-              {!Element ? <div>Component could not be found</div> : <Element />}
+              {!Element ? <div>An example for component '{id}' could not be found...</div> : <Element />}
             </StyleGuide>
           </MiguelContext.Provider>
         );

@@ -46,21 +46,21 @@ module.exports = withMiguel({
 
 ### Creating your first example
 To create a Miguel example create a file named: `[componentname].example.js`.
-Use the `Describer` included in Miguel to document your component.
+Use the `Example` component included in Miguel to document your component.
 
 ```js
-import { Describer } from "miguel/components";
+import { Example } from "miguel/components";
 import { Contact } from "./Contact";
 
 export default () => (
-  <Describer title="Contact" description="Here is my contact component" id="contact">
+  <Example title="Contact" description="Here is my contact component" id="contact">
     <Contact
       title="Miguel"
       email="Miguel@test.com"
       tel="+31612345678"
       whatsapp="+31612345678"
     />
-  </Describer>
+  </Example>
 );
 ```
 
@@ -90,6 +90,20 @@ An array of directories (or files) to ignore in the watch function. This prevent
 miguel: {
   ignore: [],
 }
+```
+
+The files or directories you add to the ignore are added to a list of default ignored directories. These do not have to be added to the ignore.
+```js
+const defaultIgnore = [
+  ".git",
+  ".next",
+  "*.DS_Store",
+  "*.log",
+  "bower_components",
+  "node_modules",
+  "out",
+  "tmp",
+];
 ```
 
 ### extension
@@ -129,16 +143,16 @@ miguel: {
 ```
 
 ## Including in other tools (id=*)
-The id used in the Describer is mapped to a component that can be accessed by a query string.
-So the following example renders only the component on `/miguel?components=helloworld`.
+The id used in the Example component is mapped to a component that can be accessed by a query string.
+So the following example renders only the component on `/miguel?id=helloworld`.
 You can iframe this component in other tools like [lasagna](https://lasagna.app) or [zeroheight](https://zeroheight.com/).
 
 ```js
-import { Describer } from "miguel/components";
+import { Example } from "miguel/components";
 
 export default () => (
-  <Describer title="Hello" description="world" id="helloworld">
+  <Example title="Hello" description="world" id="helloworld">
     <div>Hello world</div>
-  </Describer>
+  </Example>
 );
 ```

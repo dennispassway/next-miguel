@@ -1,5 +1,5 @@
-import { Describer } from "./Describer";
+import { Example } from "./Example";
 import { MiguelContext } from "./context";
 import { StyleGuide } from "./StyleGuide";
 
-module.exports = { Describer, StyleGuide, MiguelContext };
+module.exports = { Example, StyleGuide, MiguelContext };
