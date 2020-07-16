@@ -38,6 +38,7 @@ class MiguelPlugin {
       "bower_components",
       "node_modules",
       "out",
+      "tmp",
     ];
 
     const wp = new Watchpack({
