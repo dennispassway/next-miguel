@@ -28,20 +28,22 @@ npm install miguel
 ```
 
 ### Adding Miguel to your build
-Add Miguel to your `next.config.js`.
+Add Miguel to your `next.config.js`. See options below.
 
 ```js
 const withMiguel = require("miguel");
 
 module.exports = withMiguel({
   miguel: {
-    ignore: ["path/to/ignore"], // Add patterns to ignore
-    extension: ".example.js", // Extension of your example files
-    gitignore: true, // Add styleguide to gitignore
-    page: "miguel", // Render page at 'pages/miguel.js'
-    watch: true, // Watch for new / removed files while developing
+    extension: ".example.js",  // Extension of your example files
+    gitignore: true,  // Add styleguide to gitignore
+    ignore: [],  // Add patterns to ignore
+    page: "miguel",  // Render page at 'pages/miguel.js'
+    rebuildIdsOnUpdate: false, // Rebuild the styleguide on changes
+    watch: true, // Watch for changes files while developing
   },
 });
+
 ```
 
 ### Creating your first example
@@ -81,7 +83,31 @@ module.exports = withMiguel({
   ...
 });
 ```
-An example
+
+extension: ".example.js",  // Extension of your example files
+    gitignore: true,  // Add styleguide to gitignore
+    ignore: [],  // Add patterns to ignore
+    page: "miguel",  // Render page at 'pages/miguel.js'
+    rebuildIdsOnUpdate: false, // Rebuild the styleguide on changes
+    watch: true, // Watch for changes files while developing
+
+### extension
+The extension to look for. These files contain your examples that are generated in the styleguide. Defaults to `.example.js`.
+
+```js
+miguel: {
+  extension: '.example.js',
+}
+```
+
+### gitignore
+Should the generated page automatically be added to the .gitignore? Defaults to `true`.
+
+```js
+miguel: {
+  ignore: true,
+}
+```
 
 ### ignore
 An array of directories (or files) to ignore in the watch function. This prevents a styleguide build when files change in that directory. Defaults to `[]`.
@@ -106,30 +132,22 @@ const defaultIgnore = [
 ];
 ```
 
-### extension
-The extension to look for. These files contain your examples that are generated in the styleguide. Defaults to `.example.js`.
-
-```js
-miguel: {
-  extension: '.example.js',
-}
-```
-
-### gitignore
-Should the generated page automatically be added to the .gitignore? Defaults to `true`.
-
-```js
-miguel: {
-  ignore: true,
-}
-```
-
 ### page
 The page the styleguide is rendered to. This value is automatically created at `/pages/[page].js` so that next builds it as a page. Defaults to `'miguel'`.
 
 ```js
 miguel: {
   page: 'miguel',
+}
+```
+
+### rebuildIdsOnUpdate
+Should miguel rebuild the styleguide when a file is updated? Defaults to `false`.
+When you change an example's id, this will not be updated before you restart miguel. To fix this, you can choose to rebuild on every update. **This makes your build much slower**, since the content of your examples is parsed on every change.
+
+```js
+miguel: {
+  rebuildIdsOnUpdate: false
 }
 ```
 
