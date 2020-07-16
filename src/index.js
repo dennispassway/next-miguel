@@ -2,9 +2,8 @@ import path from "path";
 import runMiguel from "./scripts/runMiguel";
 import Watchpack from "watchpack";
 
-/* @TODO: instead of directories add directories to ignore */
 const defaults = {
-  directories: ["components"],
+  ignore: [],
   extension: ".example.js",
   gitignore: true,
   page: "miguel",
@@ -31,11 +30,22 @@ class MiguelPlugin {
 
     let files = [];
 
-    const wp = new Watchpack();
-    const directoriesToWatch = this.options.directories.map((dir) =>
-      path.join(path.resolve("."), dir)
-    );
-    wp.watch([], directoriesToWatch, 0);
+    const defaultIgnore = [
+      ".git",
+      ".next",
+      "*.DS_Store",
+      "*.log",
+      "bower_components",
+      "node_modules",
+      "out",
+    ];
+
+    const wp = new Watchpack({
+      ignored: [...defaultIgnore, ...this.options.ignore].map((current) =>
+        path.join(path.resolve("."), current)
+      ),
+    });
+    wp.watch([], [path.resolve(".")], 0);
 
     wp.on("aggregated", () => {
       const knownFiles = wp.getTimeInfoEntries();
