@@ -1,9 +1,10 @@
-const fs = require("fs");
-const glob = require("glob");
-const path = require("path");
+import fs from "fs";
+import glob from "glob";
+import notify from "../utils/notify";
+import path from "path";
 
 export default ({ extension, gitignore, page }) => {
-  console.log("\x1b[33mmiguel\x1b[0m - %s", "styleguide started");
+  notify("compiling styleguide...");
 
   glob(`**/*${extension}`, function (err, filePaths) {
     if (err) {
@@ -27,12 +28,12 @@ function getElementsForExtension({ filePaths, extension }) {
     const elementString = `${name}Example`;
 
     const fileContents = fs.readFileSync(filePath, "utf8");
-    const describerPropsRegex = /\<Describer([^\>]*\n*)*\>/;
-    const describerMatches = fileContents.match(describerPropsRegex);
-    const describerProps =
-      describerMatches && describerMatches.length ? describerMatches[1] : "";
+    const examplePropsRegex = /\<Example([^\>]*\n*)*\>/;
+    const exampleMatches = fileContents.match(examplePropsRegex);
+    const exampleProps =
+      exampleMatches && exampleMatches.length ? exampleMatches[1] : "";
     const idRegEx = /id\=\"(.+)\"/;
-    const idResult = describerProps.match(idRegEx);
+    const idResult = exampleProps.match(idRegEx);
     const idString =
       idResult && idResult.length
         ? idResult[1]
@@ -57,7 +58,7 @@ function writeTemplateToFile({ examples, page }) {
       throw err;
     }
 
-    console.log("\x1b[33mmiguel\x1b[0m - %s", `styleguide done`);
+    notify("styleguide compiled successfully");
   });
 }
 
@@ -71,10 +72,7 @@ function addToGitignore({ page }) {
         throw err;
       }
 
-      console.log(
-        "\x1b[33mmiguel\x1b[0m - %s",
-        `created .gitignore with ${pagePath}`
-      );
+      notify(`created .gitignore with ${pagePath}`);
     });
   } else {
     const content = fs.readFileSync(gitgnorePath, "utf8");
@@ -94,10 +92,7 @@ function addToGitignore({ page }) {
         throw err;
       }
 
-      console.log(
-        "\x1b[33mmiguel\x1b[0m - %s",
-        `added ${pagePath} to .gitignore`
-      );
+      notify(`added ${pagePath} to .gitignore`);
     });
   }
 }
