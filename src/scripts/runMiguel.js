@@ -3,7 +3,7 @@ const glob = require("glob");
 const path = require("path");
 
 export default ({ extension, gitignore, page }) => {
-  console.log("\x1b[33mmiguel\x1b[0m - %s", "styleguide:start");
+  console.log("\x1b[33mmiguel\x1b[0m - %s", "styleguide started");
 
   glob(`**/*${extension}`, function (err, filePaths) {
     if (err) {
@@ -57,7 +57,7 @@ function writeTemplateToFile({ examples, page }) {
       throw err;
     }
 
-    console.log("\x1b[33mmiguel\x1b[0m - %s", `styleguide:done`);
+    console.log("\x1b[33mmiguel\x1b[0m - %s", `styleguide done`);
   });
 }
 
