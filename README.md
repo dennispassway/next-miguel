@@ -9,6 +9,8 @@ Miguel is a simple styleguide generator for [Next.js](https://nextjs.org/).
 - Uses Next.js `pages` directory to create a styleguide that is embedded in your application.
 - (Almost) no config required, components are always up to date with your live application.
 - It's simple, dead simple. A title, description and a component, that's it.
+- App context? Router dependencies? Something else? Still works.
+- Miguel is easy to integrate with your (external) design system.
 
 No setbacks or frustrated keyboard smashing. If it works in your Next app, it works in Miguel.
 
