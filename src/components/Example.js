@@ -11,17 +11,29 @@ export const Example = ({ children, description, title, id }) => {
   const component = router?.query.id;
   const root = miguelRoot || "miguel";
 
+  /* @TODO: styling gets messed up because wrong virtual dom is reused, fix it. */
   return component ? (
     children
   ) : (
     <>
-      <Container size="small">
-        <h2 style={miguelExampleStyles.title}>{title}</h2>
-        <p style={miguelExampleStyles.description}>{description}</p>
+      <Container key="example-container" size="small">
+        <h2 key="example-title" style={miguelExampleStyles.title}>
+          {title}
+        </h2>
+        <p key="example-description" style={miguelExampleStyles.description}>
+          {description}
+        </p>
       </Container>
-      <Container>
-        <div style={miguelExampleStyles.childrenContainerContainer}>
-          <ChildrenContainer miguelId={id} root={root}>
+      <Container key="example-container-2">
+        <div
+          key="example-childrencontainercontainerr"
+          style={miguelExampleStyles.childrenContainerContainer}
+        >
+          <ChildrenContainer
+            key="example-childrencontainer"
+            miguelId={id}
+            root={root}
+          >
             {children}
           </ChildrenContainer>
         </div>
