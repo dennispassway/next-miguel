@@ -17,11 +17,11 @@ export const Example = ({ children, description, title, id }) => {
   return (
     <div id={id}>
       <Container size="small">
-        <h2 style={styles.title}>{title}</h2>
-        <p style={styles.description}>{description}</p>
+        <h2 style={miguelExampleStyles.title}>{title}</h2>
+        <p style={miguelExampleStyles.description}>{description}</p>
       </Container>
       <Container>
-        <div style={styles.childrenContainerContainer}>
+        <div style={miguelExampleStyles.childrenContainerContainer}>
           <ChildrenContainer id={id} root={root}>
             {children}
           </ChildrenContainer>
@@ -58,11 +58,11 @@ const ChildrenContainer = ({ children, id, root }) => {
   }, []);
 
   return (
-    <div ref={backgroundRef} style={styles.background}>
-      <div ref={containerRef} style={styles.container}>
-        <div style={styles.children}>{children}</div>
+    <div ref={backgroundRef} style={miguelExampleStyles.background}>
+      <div ref={containerRef} style={miguelExampleStyles.container}>
+        <div style={miguelExampleStyles.children}>{children}</div>
         <div
-          style={styles.dragButton}
+          style={miguelExampleStyles.dragButton}
           onMouseDown={(e) =>
             onDragMouseDown({
               clientX: e.clientX,
@@ -71,14 +71,18 @@ const ChildrenContainer = ({ children, id, root }) => {
             })
           }
         >
-          <DragIcon style={styles.dragIcon} />
+          <DragIcon style={miguelExampleStyles.dragIcon} />
         </div>
       </div>
-      <div style={styles.linkContainer}>
+      <div style={miguelExampleStyles.linkContainer}>
         {id && (
           <Link href={`/${root}?id=${id}`}>
-            <a style={styles.link} target="_blank" rel="noopener noreferrer">
-              <LinkIcon style={styles.linkIcon} />
+            <a
+              style={miguelExampleStyles.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkIcon style={miguelExampleStyles.linkIcon} />
               <span>{`/${root}?id=${id}`}</span>
             </a>
           </Link>
@@ -130,7 +134,7 @@ function onDragMouseDown({ clientX, element, maxWidthElement }) {
   window.addEventListener("mouseup", onDragEnd, false);
 }
 
-const styles = {
+const miguelExampleStyles = {
   title: {
     color: "#222",
     fontFamily:
