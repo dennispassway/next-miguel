@@ -1,16 +1,23 @@
 import Head from "next/head";
-import { Container } from "./Container";
 
 export const StyleGuide = ({ children, clean }) => (
   <>
     <Head>
       <style
         dangerouslySetInnerHTML={{
-          __html: `body { margin: 0 !important; padding: 0 !important; }`,
+          __html: `body { margin: 0 !important; padding: 72px 0 0 !important; }`,
         }}
       />
     </Head>
 
-    {clean ? children : <Container>{children}</Container>}
+    {clean ? (
+      children
+    ) : (
+      <div>
+        {React.Children.map(children, (child) => (
+          <div style={{ margin: "0 0 72px" }}>{child}</div>
+        ))}
+      </div>
+    )}
   </>
 );
