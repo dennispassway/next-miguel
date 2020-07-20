@@ -11,24 +11,22 @@ export const Example = ({ children, description, title, id }) => {
   const component = router?.query.id;
   const root = miguelRoot || "miguel";
 
-  if (component) {
-    return children;
-  }
-
-  return (
-    <div id={id}>
+  return component ? (
+    children
+  ) : (
+    <>
       <Container size="small">
         <h2 style={miguelExampleStyles.title}>{title}</h2>
         <p style={miguelExampleStyles.description}>{description}</p>
       </Container>
       <Container>
         <div style={miguelExampleStyles.childrenContainerContainer}>
-          <ChildrenContainer id={id} root={root}>
+          <ChildrenContainer miguelId={id} root={root}>
             {children}
           </ChildrenContainer>
         </div>
       </Container>
-    </div>
+    </>
   );
 };
 
@@ -44,7 +42,7 @@ const Container = ({ children, size }) => (
   </div>
 );
 
-const ChildrenContainer = ({ children, id, root }) => {
+const ChildrenContainer = ({ children, miguelId, root }) => {
   const backgroundRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -76,15 +74,15 @@ const ChildrenContainer = ({ children, id, root }) => {
         </div>
       </div>
       <div style={miguelExampleStyles.linkContainer}>
-        {id && (
-          <Link href={`/${root}?id=${id}`}>
+        {miguelId && (
+          <Link href={`/${root}?id=${miguelId}`}>
             <a
               style={miguelExampleStyles.link}
               target="_blank"
               rel="noopener noreferrer"
             >
               <LinkIcon style={miguelExampleStyles.linkIcon} />
-              <span>{`/${root}?id=${id}`}</span>
+              <span>{`/${root}?id=${miguelId}`}</span>
             </a>
           </Link>
         )}
