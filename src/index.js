@@ -95,7 +95,8 @@ module.exports = (nextConfig) => ({
       );
     }
 
-    if (options.isServer) {
+    /* Currently only in dev, on build run it from cli. */
+    if (options.dev && options.isServer) {
       config.plugins.push(new MiguelPlugin(nextConfig));
     }
 
