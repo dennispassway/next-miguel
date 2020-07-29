@@ -1,11 +1,11 @@
 {
-  "name": "miguel",
+  "name": "next-miguel",
   "description": "A simple styleguide generator for Next.js",
   "version": "0.1.3",
   "main": "./lib/index.js",
   "license": "MIT",
   "bin" : {
-    "miguel" : "./lib/bin/cli.js"
+    "next-miguel" : "./lib/bin/cli.js"
   },
   "scripts": {
     "build": "rimraf lib && babel src -d lib"

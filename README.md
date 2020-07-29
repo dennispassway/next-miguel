@@ -20,18 +20,18 @@ No setbacks or frustrated keyboard smashing. If it works in your Next app, it wo
 To get started, add Miguel to your project with yarn or npm.
 
 ```
-yarn add miguel
+yarn add next-miguel
 ```
 
 ```
-npm install miguel
+npm install next-miguel
 ```
 
 ### Adding Miguel to your build
 Add Miguel to your `next.config.js`. See options below.
 
 ```js
-const withMiguel = require("miguel");
+const withMiguel = require("next-miguel");
 
 module.exports = withMiguel({
   miguel: {
@@ -51,7 +51,7 @@ To create a Miguel example create a file named: `[componentname].example.js`.
 Use the `Example` component included in Miguel to document your component.
 
 ```js
-import { Example } from "miguel/components";
+import { Example } from "next-miguel/components";
 import { Contact } from "./Contact";
 
 export default () => (
@@ -166,7 +166,7 @@ So the following example renders only the component on `/miguel?id=helloworld`.
 You can iframe this component in other tools like [lasagna](https://lasagna.app) or [zeroheight](https://zeroheight.com/).
 
 ```js
-import { Example } from "miguel/components";
+import { Example } from "next-miguel/components";
 
 export default () => (
   <Example title="Hello" description="world" id="helloworld">
@@ -177,6 +177,5 @@ export default () => (
 
 ## Todos
 - [] Multiple examples in 1 file
-- [] move to next-miguel?
 - [] open-source it
 - [] publish with github actions (https://sergiodxa.com/articles/github-actions-npm-publish/)
