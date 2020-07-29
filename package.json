@@ -4,6 +4,9 @@
   "version": "0.1.2",
   "main": "./lib/index.js",
   "license": "MIT",
+  "bin" : {
+    "miguel" : "./lib/bin/cli.js"
+  },
   "scripts": {
     "build": "rimraf lib && babel src -d lib"
   },
