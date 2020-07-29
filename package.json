@@ -1,7 +1,7 @@
 {
   "name": "miguel",
   "description": "A simple styleguide generator for Next.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "./lib/index.js",
   "license": "MIT",
   "scripts": {
