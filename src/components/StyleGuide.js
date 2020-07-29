@@ -13,10 +13,19 @@ export const StyleGuide = ({ children, clean }) => (
     {clean ? (
       children
     ) : (
-      <div style={{ margin: "72px 0 0" }}>
+      <div className="container">
         {React.Children.map(children, (child) => (
-          <div style={{ margin: "0 0 72px" }}>{child}</div>
+          <div className="child">{child}</div>
         ))}
+        <style jsx>{`
+          .container {
+            margin: 72px 0 0;
+          }
+
+          .child {
+            margin: 0 0 72px;
+          }
+        `}</style>
       </div>
     )}
   </>

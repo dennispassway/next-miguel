@@ -103,7 +103,7 @@ function generateTemplate({ examples, page }) {
     import { useRouter } from "next/router";
     ${examples.map(({ importString }) => importString).join("\n")}
 
-    export default () => {
+    const Miguel = () => {
       const {
         query: { id },
       } = useRouter();
@@ -120,7 +120,7 @@ function generateTemplate({ examples, page }) {
         const Element = componentMap[id];
 
         return (
-          <MiguelContext.Provider value={{ miguelRoot: '${page}' }}>
+          <MiguelContext.Provider value={{ miguelRoot: '${page}', componentId: id }}>
             <StyleGuide clean>
               {!Element ? <div>An example for component '{id}' could not be found...</div> : <Element />}
             </StyleGuide>
@@ -129,7 +129,7 @@ function generateTemplate({ examples, page }) {
       }
 
       return (
-        <MiguelContext.Provider value={{ miguelRoot: '${page}' }}>
+        <MiguelContext.Provider value={{ miguelRoot: '${page}', componentId: id }}>
           <StyleGuide>
             ${examples
               .map(({ elementString }) => `<${elementString} />`)
@@ -138,5 +138,7 @@ function generateTemplate({ examples, page }) {
         </MiguelContext.Provider>
       );
     };
+
+    export default Miguel;
   `;
 }
