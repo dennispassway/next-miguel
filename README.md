@@ -3,6 +3,8 @@
   <p align="center">Styleguide generator for https://nextjs.org/</p>
 </p>
 
+![Publish to npm](https://github.com/dennispassway/next-miguel/workflows/Publish%20to%20npm/badge.svg)
+
 ## Why Miguel?
 Miguel is a simple styleguide generator for [Next.js](https://nextjs.org/).
 
