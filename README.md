@@ -43,7 +43,12 @@ module.exports = withMiguel({
     watch: true, // Watch for changes files while developing
   },
 });
+```
 
+And for production add it to your build step as well:
+
+```
+"build": "next-miguel && next build"
 ```
 
 ### Creating your first example
