@@ -1,3 +1,4 @@
+import { iframeResizerContentWindow } from "iframe-resizer";
 import { useEffect, useRef } from "react";
 import { useMiguelContext } from "./context";
 import Link from "next/link";
