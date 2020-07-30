@@ -141,12 +141,6 @@ const ChildrenContainer = ({ children, miguelId, root }) => {
           width: 40px;
         }
 
-        .dragIcon {
-          fill: currentColor;
-          height: 20px;
-          width: 20px;
-        }
-
         .linkContainer {
           background-color: #fff;
           border-bottom: solid 1px #ddd;
@@ -169,13 +163,6 @@ const ChildrenContainer = ({ children, miguelId, root }) => {
           font-weight: 600;
           line-height: 1.2;
           margin: 0;
-        }
-
-        .linkIcon {
-          fill: currentColor;
-          height: 20px;
-          margin: 0 10px 0 0;
-          width: 20px;
         }
       `}</style>
     </div>
