@@ -184,5 +184,3 @@ export default () => (
 
 ## Todos
 - [] Multiple examples in 1 file
-- [] open-source it
-- [] publish with github actions (https://sergiodxa.com/articles/github-actions-npm-publish/)
