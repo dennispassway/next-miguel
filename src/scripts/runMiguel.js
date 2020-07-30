@@ -99,7 +99,7 @@ function addToGitignore({ page }) {
 
 function generateTemplate({ examples, page }) {
   return `
-    import { MiguelContext, StyleGuide } from "miguel/components";
+    import { MiguelContext, StyleGuide } from "next-miguel/components";
     import { useRouter } from "next/router";
     ${examples.map(({ importString }) => importString).join("\n")}
 
