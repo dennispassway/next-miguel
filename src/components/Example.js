@@ -212,12 +212,12 @@ const LinkIcon = (props) => (
 );
 
 function onDragMouseDown({ clientX, element, maxWidthElement }) {
+  const minWidth = 360;
+  const maxWidth = parseInt(maxWidthElement.getBoundingClientRect().width, 10);
   let startX = clientX;
-  let startWidth = parseInt(maxWidthElement.getBoundingClientRect().width, 10);
+  let startWidth = parseInt(element.getBoundingClientRect().width, 10);
 
   const onDrag = ({ clientX }) => {
-    const minWidth = 360;
-    const maxWidth = startWidth;
     const targetWidth = startWidth + clientX - startX;
     const newWidth =
       targetWidth < minWidth
