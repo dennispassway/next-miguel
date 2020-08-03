@@ -1,7 +1,16 @@
 {
   "name": "next-miguel",
-  "description": "A simple styleguide generator for Next.js",
   "version": "0.1.3",
+  "description": "Miguel is a simple styleguide generator for NextJS.",
+  "keywords": [
+    "next",
+    "nextjs",
+    "react",
+    "styleguide"
+  ],
+  "homepage": "https://github.com/dennispassway/next-miguel",
+  "bugs": "https://github.com/dennispassway/next-miguel/issues",
+  "author": "Dennis Passway",
   "main": "./lib/index.js",
   "license": "MIT",
   "bin": {
