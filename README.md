@@ -76,6 +76,66 @@ export const ContactExample = () => (
 Run your local next server (`next`) and navigate to `/miguel` to see the result.
 By default, Miguel finds all `*.examples.js` files in your project and generates examples for them. The styleguide is created at `/pages/miguel.js`
 
+
+## Multiple Examples
+To create multiple Miguel examples you can add multiple named exports to the same file.
+Use the `Example` component included in Miguel to document your component.
+
+```js
+import { Example } from "next-miguel/components";
+import { Contact } from "./Contact";
+
+export const ContactExampleA = () => (
+  <Example title="Contact A" description="Here is my contact component in form A">
+    <Contact
+      title="Miguel"
+      email="Miguel@test.com"
+      tel="+31612345678"
+      whatsapp="+31612345678"
+    />
+  </Example>
+);
+
+export const ContactExampleB = () => (
+  <Example title="Contact B" description="Here is my contact component in form B">
+    <Contact
+      title="The brother of Miguel"
+      email="miguelsbrother@test.com"
+      tel="+31612345678"
+      whatsapp="+31612345678"
+    />
+  </Example>
+);
+```
+
+## Including in other tools
+The name of the export used in the Example component is mapped to a component that can be accessed by a query string.
+So the following example renders the component on `/miguel?id=HelloWorld`.
+
+You can iframe this component in other tools like [lasagna](https://lasagna.app) or [zeroheight](https://zeroheight.com/). When included in other source, the examples use [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) to make them responsive in iframes.
+
+```js
+import { Example } from "next-miguel/components";
+
+export const HelloWorld = () => (
+  <Example title="Hello" description="world">
+    <div>Hello world</div>
+  </Example>
+);
+```
+
+To add a link to the example on the miguel page add an id to the example component with the same name as your named export.
+
+```js
+import { Example } from "next-miguel/components";
+
+export const HelloWorld = () => (
+  <Example title="Hello" description="world" id="HelloWorld">
+    <div>Hello world</div>
+  </Example>
+);
+```
+
 ## Options
 Options are passed in the next config under the `miguel` key. When an option is ommited, the default value is used.
 
@@ -147,63 +207,4 @@ const defaultIgnore = [
   "out",
   "tmp",
 ];
-```
-
-## Multiple Examples
-To create multiple Miguel examples you can add multiple named exports to the same file.
-Use the `Example` component included in Miguel to document your component.
-
-```js
-import { Example } from "next-miguel/components";
-import { Contact } from "./Contact";
-
-export const ContactExampleA = () => (
-  <Example title="Contact A" description="Here is my contact component in form A">
-    <Contact
-      title="Miguel"
-      email="Miguel@test.com"
-      tel="+31612345678"
-      whatsapp="+31612345678"
-    />
-  </Example>
-);
-
-export const ContactExampleB = () => (
-  <Example title="Contact B" description="Here is my contact component in form B">
-    <Contact
-      title="The brother of Miguel"
-      email="miguelsbrother@test.com"
-      tel="+31612345678"
-      whatsapp="+31612345678"
-    />
-  </Example>
-);
-```
-
-## Including in other tools
-The name of the export used in the Example component is mapped to a component that can be accessed by a query string.
-So the following example renders the component on `/miguel?id=HelloWorld`.
-
-You can iframe this component in other tools like [lasagna](https://lasagna.app) or [zeroheight](https://zeroheight.com/). When included in other source, the examples use [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) to make them responsive in iframes.
-
-```js
-import { Example } from "next-miguel/components";
-
-export const HelloWorld = () => (
-  <Example title="Hello" description="world">
-    <div>Hello world</div>
-  </Example>
-);
-```
-
-To add a link to the example on the miguel page add an id to the example component with the same name as your named export.
-
-```js
-import { Example } from "next-miguel/components";
-
-export const HelloWorld = () => (
-  <Example title="Hello" description="world" id="HelloWorld">
-    <div>Hello world</div>
-  </Example>
-);
 ```
