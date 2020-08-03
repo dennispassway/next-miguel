@@ -19,7 +19,7 @@ export const Example = ({ children, description, title, id }) => {
       </Container>
       <Container>
         <div className="childrenContainerContainer">
-          <ChildrenContainer miguelId={id} root={root}>
+          <ChildrenContainer id={id} root={root}>
             {children}
           </ChildrenContainer>
         </div>
@@ -68,7 +68,7 @@ const Container = ({ children, size }) => (
   </div>
 );
 
-const ChildrenContainer = ({ children, miguelId, root }) => {
+const ChildrenContainer = ({ children, root, id }) => {
   const backgroundRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -99,16 +99,16 @@ const ChildrenContainer = ({ children, miguelId, root }) => {
           <DragIcon />
         </div>
       </div>
-      <div className="linkContainer">
-        {miguelId && (
-          <Link href={`/${root}?id=${miguelId}`}>
+      {id && (
+        <div className="linkContainer">
+          <Link href={`/${root}?id=${id}`}>
             <a className="link" target="_blank" rel="noopener noreferrer">
               <LinkIcon />
-              <span>{`/${root}?id=${miguelId}`}</span>
+              <span>{`/${root}?id=${id}`}</span>
             </a>
           </Link>
-        )}
-      </div>
+        </div>
+      )}
       <style jsx>{`
         .background {
           background-color: #fafafa;
