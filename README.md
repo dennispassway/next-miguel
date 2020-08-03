@@ -39,9 +39,8 @@ module.exports = withMiguel({
   miguel: {
     extension: ".example.js",  // Extension of your example files
     gitignore: true,  // Add styleguide to gitignore
-    ignore: [],  // Add patterns to ignore
     page: "miguel",  // Render page at 'pages/miguel.js'
-    rebuildIdsOnUpdate: false, // Rebuild the styleguide on changes
+    watchIgnore: [],  // Add files or directies that should not be watched
     watch: true, // Watch for changes files while developing
   },
 });
@@ -61,8 +60,8 @@ Use the `Example` component included in Miguel to document your component.
 import { Example } from "next-miguel/components";
 import { Contact } from "./Contact";
 
-export default () => (
-  <Example title="Contact" description="Here is my contact component" id="contact">
+export const ContactExample = () => (
+  <Example title="Contact" description="Here is my contact component">
     <Contact
       title="Miguel"
       email="Miguel@test.com"
@@ -77,6 +76,66 @@ export default () => (
 Run your local next server (`next`) and navigate to `/miguel` to see the result.
 By default, Miguel finds all `*.examples.js` files in your project and generates examples for them. The styleguide is created at `/pages/miguel.js`
 
+
+## Multiple Examples
+To create multiple Miguel examples you can add multiple named exports to the same file.
+Use the `Example` component included in Miguel to document your component.
+
+```js
+import { Example } from "next-miguel/components";
+import { Contact } from "./Contact";
+
+export const ContactExampleA = () => (
+  <Example title="Contact A" description="Here is my contact component in form A">
+    <Contact
+      title="Miguel"
+      email="Miguel@test.com"
+      tel="+31612345678"
+      whatsapp="+31612345678"
+    />
+  </Example>
+);
+
+export const ContactExampleB = () => (
+  <Example title="Contact B" description="Here is my contact component in form B">
+    <Contact
+      title="The brother of Miguel"
+      email="miguelsbrother@test.com"
+      tel="+31612345678"
+      whatsapp="+31612345678"
+    />
+  </Example>
+);
+```
+
+## Including in other tools
+The name of the export used in the Example component is mapped to a component that can be accessed by a query string.
+So the following example renders the component on `/miguel?id=HelloWorld`.
+
+You can iframe this component in other tools like [lasagna](https://lasagna.app) or [zeroheight](https://zeroheight.com/). When included in other source, the examples use [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) to make them responsive in iframes.
+
+```js
+import { Example } from "next-miguel/components";
+
+export const HelloWorld = () => (
+  <Example title="Hello" description="world">
+    <div>Hello world</div>
+  </Example>
+);
+```
+
+To add a link to the example on the miguel page add an id to the example component with the same name as your named export.
+
+```js
+import { Example } from "next-miguel/components";
+
+export const HelloWorld = () => (
+  <Example title="Hello" description="world" id="HelloWorld">
+    <div>Hello world</div>
+  </Example>
+);
+```
+
 ## Options
 Options are passed in the next config under the `miguel` key. When an option is ommited, the default value is used.
 
@@ -90,13 +149,6 @@ module.exports = withMiguel({
   ...
 });
 ```
-
-extension: ".example.js",  // Extension of your example files
-    gitignore: true,  // Add styleguide to gitignore
-    ignore: [],  // Add patterns to ignore
-    page: "miguel",  // Render page at 'pages/miguel.js'
-    rebuildIdsOnUpdate: false, // Rebuild the styleguide on changes
-    watch: true, // Watch for changes files while developing
 
 ### extension
 The extension to look for. These files contain your examples that are generated in the styleguide. Defaults to `.example.js`.
@@ -116,7 +168,25 @@ miguel: {
 }
 ```
 
-### ignore
+### page
+The page the styleguide is rendered to. This value is automatically created at `/pages/[page].js` so that next builds it as a page. Defaults to `'miguel'`.
+
+```js
+miguel: {
+  page: 'miguel',
+}
+```
+
+### watch
+Should miguel watch for file changes while developing? Defaults to `true`.
+
+```js
+miguel: {
+  watch: true,
+}
+```
+
+### watchIgnore
 An array of directories (or files) to ignore in the watch function. This prevents a styleguide build when files change in that directory. Defaults to `[]`.
 
 ```js
@@ -138,49 +208,3 @@ const defaultIgnore = [
   "tmp",
 ];
 ```
-
-### page
-The page the styleguide is rendered to. This value is automatically created at `/pages/[page].js` so that next builds it as a page. Defaults to `'miguel'`.
-
-```js
-miguel: {
-  page: 'miguel',
-}
-```
-
-### rebuildIdsOnUpdate
-Should miguel rebuild the styleguide when a file is updated? Defaults to `false`.
-When you change an example's id, this will not be updated before you restart miguel. To fix this, you can choose to rebuild on every update. **This makes your build much slower**, since the content of your examples is parsed on every change.
-
-```js
-miguel: {
-  rebuildIdsOnUpdate: false
-}
-```
-
-### watch
-Should miguel watch for file changes while developing? Defaults to `true`.
-
-```js
-miguel: {
-  watch: true,
-}
-```
-
-## Including in other tools (id=*)
-The id used in the Example component is mapped to a component that can be accessed by a query string.
-So the following example renders only the component on `/miguel?id=helloworld`.
-You can iframe this component in other tools like [lasagna](https://lasagna.app) or [zeroheight](https://zeroheight.com/).
-
-```js
-import { Example } from "next-miguel/components";
-
-export default () => (
-  <Example title="Hello" description="world" id="helloworld">
-    <div>Hello world</div>
-  </Example>
-);
-```
-
-## Todos
-- [] Multiple examples in 1 file
