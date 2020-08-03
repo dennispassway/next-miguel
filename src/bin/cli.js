@@ -1,17 +1,9 @@
 #!/usr/bin/env node
 
+import { defaults } from "../defaults";
 import fs from "fs";
 import path from "path";
 import runMiguel from "../scripts/runMiguel";
-
-const defaults = {
-  extension: ".example.js",
-  gitignore: true,
-  ignore: [],
-  page: "miguel",
-  rebuildIdsOnUpdate: false,
-  watch: true,
-};
 
 const nextConfig = path.join(path.resolve("."), "next.config.js");
 const miguelConfigRegex = new RegExp("miguel: {([^}]+)}");

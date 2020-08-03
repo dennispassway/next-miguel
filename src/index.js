@@ -1,16 +1,8 @@
+import { defaults } from "./defaults";
 import notify from "./utils/notify";
 import path from "path";
 import runMiguel from "./scripts/runMiguel";
 import Watchpack from "watchpack";
-
-const defaults = {
-  extension: ".example.js",
-  gitignore: true,
-  ignore: [],
-  page: "miguel",
-  rebuildIdsOnUpdate: false,
-  watch: true,
-};
 
 class MiguelPlugin {
   constructor(options) {
@@ -30,7 +22,7 @@ class MiguelPlugin {
   apply(compiler) {
     if (this.options.watch === false) {
       runMiguel(this.options);
-      return notify("not watching for file changes");
+      return notify("watch disabled - not listening to changes");
     }
 
     compiler.hooks.watchRun.tap("MiguelPlugin", () => {
@@ -38,15 +30,8 @@ class MiguelPlugin {
       const { extension } = this.options;
 
       if (changedFiles.find((file) => file.includes(extension))) {
-        notify(
-          `example updated (${
-            this.options.rebuildIdsOnUpdate ? "with" : "without"
-          } rebuild of ids)`
-        );
-
-        if (this.options.rebuildIdsOnUpdate) {
-          runMiguel(this.options);
-        }
+        notify(`example updated`);
+        runMiguel(this.options);
       }
     });
 
@@ -64,7 +49,7 @@ class MiguelPlugin {
     ];
 
     const wp = new Watchpack({
-      ignored: [...defaultIgnore, ...this.options.ignore].map((current) =>
+      ignored: [...defaultIgnore, ...this.options.watchIgnore].map((current) =>
         path.join(path.resolve("."), current)
       ),
     });
