@@ -5536,6 +5536,14 @@ watchpack@2.0.0-beta.13:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
+watchpack@2.0.0-beta.15:
+  version "2.0.0-beta.15"
+  resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-2.0.0-beta.15.tgz#0e69c8e5d680c7b4c181db3f70e500ca84cef794"
+  integrity sha512-zyhhC7vEajo5fZEUxlhVpC1uLAOs088zy8RwzcMp8YucTBirNCNmTFQWVeoKxKNNqEfYUBQdVzW3wfItcc/eUQ==
+  dependencies:
+    glob-to-regexp "^0.4.1"
+    graceful-fs "^4.1.2"
+
 watchpack@^1.7.4:
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.7.4.tgz#6e9da53b3c80bb2d6508188f5b200410866cd30b"
