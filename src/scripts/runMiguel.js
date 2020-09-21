@@ -132,7 +132,9 @@ function generateTemplate({ components, page }) {
       return (
         <MiguelContext.Provider value={{ miguelRoot: '${page}', componentId: id }}>
           <StyleGuide>
-            ${components.map(({ component }) => `<${component} />`).join("\n")}
+            ${components
+              .map(({ component }) => `<${component} id='${component}' />`)
+              .join("\n")}
           </StyleGuide>
         </MiguelContext.Provider>
       );
