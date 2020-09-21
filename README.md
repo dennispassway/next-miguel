@@ -60,8 +60,8 @@ Use the `Example` component included in Miguel to document your component.
 import { Example } from "next-miguel/components";
 import { Contact } from "./Contact";
 
-export const ContactExample = () => (
-  <Example title="Contact" description="Here is my contact component">
+export const ContactExample = ({ id }) => (
+  <Example title="Contact" description="Here is my contact component" id={id}>
     <Contact
       title="Miguel"
       email="Miguel@test.com"
@@ -85,8 +85,8 @@ Use the `Example` component included in Miguel to document your component.
 import { Example } from "next-miguel/components";
 import { Contact } from "./Contact";
 
-export const ContactExampleA = () => (
-  <Example title="Contact A" description="Here is my contact component in form A">
+export const ContactExampleA = ({ id }) => (
+  <Example title="Contact A" description="Here is my contact component in form A" id={id}>
     <Contact
       title="Miguel"
       email="Miguel@test.com"
@@ -96,8 +96,8 @@ export const ContactExampleA = () => (
   </Example>
 );
 
-export const ContactExampleB = () => (
-  <Example title="Contact B" description="Here is my contact component in form B">
+export const ContactExampleB = ({ id }) => (
+  <Example title="Contact B" description="Here is my contact component in form B" id={id}>
     <Contact
       title="The brother of Miguel"
       email="miguelsbrother@test.com"
@@ -124,13 +124,13 @@ export const HelloWorld = () => (
 );
 ```
 
-To add a link to the example on the miguel page add an id to the example component with the same name as your named export.
+To add a link to the example on the miguel page add an id to the example component.
 
 ```js
 import { Example } from "next-miguel/components";
 
-export const HelloWorld = () => (
-  <Example title="Hello" description="world" id="HelloWorld">
+export const HelloWorld = ({ id }) => (
+  <Example title="Hello" description="world" id={id}>
     <div>Hello world</div>
   </Example>
 );
