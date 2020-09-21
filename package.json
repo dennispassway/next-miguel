@@ -22,16 +22,16 @@
   "dependencies": {
     "fast-glob": "^3.2.4",
     "iframe-resizer": "^4.2.11",
-    "next": "^9.5.1",
-    "watchpack": "2.0.0-beta.13"
+    "next": "^9.5.3",
+    "watchpack": "2.0.0"
   },
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.0",
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
     "rimraf": "^3.0.2"
   }
 }
