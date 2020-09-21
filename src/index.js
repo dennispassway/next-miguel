@@ -48,11 +48,18 @@ class MiguelPlugin {
       "tmp",
     ];
 
+    /*
+      @TODO: On creation of a new file, miguel runs. Since there is no content yet,
+      it's exports is not added to the page. Upon adding an export to the file,
+      it is not picked up since miguel will not run.
+    */
+
     const wp = new Watchpack({
       ignored: [...defaultIgnore, ...this.options.watchIgnore].map((current) =>
         path.join(path.resolve("."), current)
       ),
     });
+
     wp.watch([], [path.resolve(".")], 0);
 
     wp.on("aggregated", () => {
