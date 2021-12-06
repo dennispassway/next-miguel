@@ -23,7 +23,7 @@
     "fast-glob": "^3.2.4",
     "iframe-resizer": "^4.2.11",
     "next": "^9.5.3",
-    "watchpack": "2.0.0"
+    "watchpack": "2.3.1"
   },
   "peerDependencies": {
     "react": "^16.13.1",
